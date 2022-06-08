@@ -15,7 +15,7 @@ from utils import ops as utils_ops
 from utils import label_map_util
 from utils import visualization_utils as vis_util
 
-font = cv2.FONT_HERSHEY_SIMPLEX
+font = cv2.FONT_HERSHEY_PLAIN
 
 
 utils_ops.tf = tf.compat.v1
@@ -55,7 +55,7 @@ def estimate_collide(output_dict,height,width,image_np):
           max_curr_obj_area = obj_area
           details = [ymin, xmin, ymax, xmax]
 
-  print(max_curr_obj_area)
+  # print(max_curr_obj_area)
   centerX , centerY = (details[1] + details[3])/2 , (details[0] + details[2])/2
   if max_curr_obj_area>70000:
     if (centerX < 0.2 and details[2] > 0.9) or (0.2 <= centerX <= 0.8) or (centerX > 0.8 and details[2] > 0.9):
@@ -69,9 +69,9 @@ def estimate_collide(output_dict,height,width,image_np):
 
   if crash_count_frames > 0:
     if max_curr_obj_area <= 100000:
-      cv2.putText(image_np,"YOU ARE GETTING CLOSER" ,(50,50), font, 1.2,(255,255,0),2,cv2.LINE_AA)
+      cv2.putText(image_np,"WARNING !!!" ,(00,100), font, 1.2,(255,0,0),2,cv2.LINE_AA)
     elif max_curr_obj_area > 100000:
-      cv2.putText(image_np,"DON'T COLLIDE !!!" ,     (50,50), font, 1.2,(255,255,0),2,cv2.LINE_AA)
+      cv2.putText(image_np,"DON'T COLLIDE !!!" ,     (50,50), font, 1.2,(255,0,0),4,cv2.LINE_AA)
 
 
 
@@ -137,10 +137,10 @@ def show_inference(model, image_path):
 
 
 
-cap=cv2.VideoCapture('../videos/b.mp4')
+cap=cv2.VideoCapture('./videos/r.mp4')
 time.sleep(2.0)
 
-cap.set(1,379*24)
+cap.set(1,0)
 
 # fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # out1 = cv2.VideoWriter('i.avi', fourcc, 3.0, (int(cap.get(3)),int(cap.get(4))))
@@ -150,10 +150,10 @@ fps = FPS().start()
 ctt = 0
 while True:
     (grabbed, frame) = cap.read()
-    print('frame',frame.shape)
+    # print('frame',frame.shape)
     frame = frame[ :-150, : , :]
-    print(frame.shape)
-    print(ctt)
+    # print(frame.shape)
+    # print(ctt)
     ctt = ctt + 1
     if ctt==3334:
       break
