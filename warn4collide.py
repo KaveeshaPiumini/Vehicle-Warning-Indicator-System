@@ -15,7 +15,7 @@ from utils import ops as utils_ops
 from utils import label_map_util
 from utils import visualization_utils as vis_util
 
-font = cv2.FONT_HERSHEY_PLAIN
+font = cv2.FONT_HERSHEY_TRIPLEX
 
 
 utils_ops.tf = tf.compat.v1
@@ -69,9 +69,9 @@ def estimate_collide(output_dict,height,width,image_np):
 
   if crash_count_frames > 0:
     if max_curr_obj_area <= 100000:
-      cv2.putText(image_np,"WARNING !!!" ,(00,100), font, 1.2,(255,0,0),2,cv2.LINE_AA)
+      cv2.putText(image_np,"WARNING !!!" ,(100,100), font, 4, (255,0,0),3,cv2.LINE_AA)
     elif max_curr_obj_area > 100000:
-      cv2.putText(image_np,"DON'T COLLIDE !!!" ,     (50,50), font, 1.2,(255,0,0),4,cv2.LINE_AA)
+      cv2.putText(image_np,"DON'T COLLIDE !!!" , (100,100), font, 4,(255,0,0),3,cv2.LINE_AA)
 
 
 
